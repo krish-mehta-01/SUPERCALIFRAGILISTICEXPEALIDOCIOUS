@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Identity Management System | Car Company</title>
+    <link rel="stylesheet" href="css/css.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo"><i class="fas fa-car"></i><span>CarX</span></div>
+                <p class="tagline">Vehicle Identity Management</p>
+            </div>
+            <ul class="nav-links">
+                <li class="active" data-page="dashboard"><i class="fas fa-home"></i><span>Dashboard</span></li>
+                <li data-page="vehicles"><i class="fas fa-car"></i><span>Vehicles</span></li>
+                <li data-page="owners"><i class="fas fa-users"></i><span>Owners</span></li>
+                <li data-page="insurance"><i class="fas fa-file-contract"></i><span>Insurance</span></li>
+                <li data-page="verification"><i class="fas fa-check-circle"></i><span>Verification</span></li>
+                <li data-page="logs"><i class="fas fa-history"></i><span>Auth Logs</span></li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <header class="top-header">
+                <h1 id="page-title">Dashboard</h1>
+                <button class="btn btn-primary" id="add-new-btn"><i class="fas fa-plus"></i> Add New</button>
+            </header>
+
+            <div id="dashboard-page" class="page active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon blue"><i class="fas fa-car"></i></div>
+                        <div class="stat-info">
+                            <h3 id="stat-vehicles">0</h3>
+                            <p>Total Vehicles</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green"><i class="fas fa-users"></i></div>
+                        <div class="stat-info">
+                            <h3 id="stat-owners">0</h3>
+                            <p>Registered Owners</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple"><i class="fas fa-shield-alt"></i></div>
+                        <div class="stat-info">
+                            <h3 id="stat-insurance">0</h3>
+                            <p>Active Insurances</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange"><i class="fas fa-check-circle"></i></div>
+                        <div class="stat-info">
+                            <h3 id="stat-auth">0</h3>
+                            <p>Successful Auths</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-sections">
+                    <div class="section-card">
+                        <h3>Recent Authorization Logs</h3>
+                        <table id="recent-logs-table">
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Vehicle</th>
+                                    <th>Action</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="section-card quick-actions">
+                        <h3>Quick Actions</h3>
+                        <div class="action-buttons">
+                            <button class="action-btn" onclick="showModal('vehicle')"><i
+                                    class="fas fa-car"></i><span>Register Vehicle</span></button>
+                            <button class="action-btn" onclick="showModal('owner')"><i
+                                    class="fas fa-user-plus"></i><span>Add Owner</span></button>
+                            <button class="action-btn" onclick="showModal('insurance')"><i
+                                    class="fas fa-file-signature"></i><span>Add Insurance</span></button>
+                            <button class="action-btn" onclick="navigateTo('verification')"><i
+                                    class="fas fa-search"></i><span>Verify Identity</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="vehicles-page" class="page">
+                <div class="search-bar"><i class="fas fa-search"></i><input type="text" id="vehicle-search"
+                        placeholder="Search vehicles..."></div>
+                <table id="vehicles-table">
+                    <thead>
+                        <tr>
+                            <th>Vehicle ID</th>
+                            <th>Registration</th>
+                            <th>Make/Model</th>
+                            <th>Year</th>
+                            <th>Owner</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div id="owners-page" class="page">
+                <div class="search-bar"><i class="fas fa-search"></i><input type="text" id="owner-search"
+                        placeholder="Search owners..."></div>
+                <table id="owners-table">
+                    <thead>
+                        <tr>
+                            <th>Owner ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div id="insurance-page" class="page">
+                <div class="search-bar"><i class="fas fa-search"></i><input type="text" id="insurance-search"
+                        placeholder="Search insurance..."></div>
+                <table id="insurance-table">
+                    <thead>
+                        <tr>
+                            <th>Policy Number</th>
+                            <th>Vehicle</th>
+                            <th>Provider</th>
+                            <th>Type</th>
+                            <th>Valid Until</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div id="verification-page" class="page">
+                <div class="verification-container">
+                    <div class="verify-card">
+                        <h3><i class="fas fa-shield-alt"></i> Platform Authorization</h3>
+                        <form id="authorization-form">
+                            <div class="form-group"><label>Vehicle ID</label><input type="text" id="auth-vehicle-id"
+                                    required></div>
+                            <div class="form-group"><label>Platform ID</label><input type="text" id="auth-platform-id"
+                                    placeholder="PLATFORM_001" required></div>
+                            <div class="form-group"><label>Action</label><select id="auth-action">
+                                    <option value="connect">Connect</option>
+                                    <option value="data_access">Data Access</option>
+                                    <option value="remote_control">Remote Control</option>
+                                    <option value="diagnostics">Diagnostics</option>
+                                </select></div>
+                            <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-check-circle"></i>
+                                Verify</button>
+                        </form>
+                        <div id="auth-result"></div>
+                    </div>
+                    <div class="verify-card">
+                        <h3><i class="fas fa-id-card"></i> Identity Verification</h3>
+                        <form id="identity-form">
+                            <div class="form-group"><label>Vehicle ID</label><input type="text" id="id-vehicle-id"
+                                    required></div>
+                            <div class="form-group"><label>Owner ID</label><input type="text" id="id-owner-id" required>
+                            </div>
+                            <button type="submit" class="btn btn-secondary btn-block"><i class="fas fa-search"></i>
+                                Verify</button>
+                        </form>
+                        <div id="identity-result"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="logs-page" class="page">
+                <table id="logs-table">
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Vehicle</th>
+                            <th>Platform</th>
+                            <th>Action</th>
+                            <th>Status</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modal-title">Add New</h3><button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="vehicle-form" class="modal-form">
+                    <div class="form-row">
+                        <div class="form-group"><label>VIN</label><input type="text" name="vin" required></div>
+                        <div class="form-group"><label>Registration</label><input type="text" name="registration_number"
+                                required></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label>Make</label><input type="text" name="make" required></div>
+                        <div class="form-group"><label>Model</label><input type="text" name="model" required></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label>Year</label><input type="number" name="year" required></div>
+                        <div class="form-group"><label>Color</label><input type="text" name="color"></div>
+                    </div>
+                    <div class="form-group"><label>Owner</label><select name="owner_id" id="vehicle-owner-select">
+                            <option value="">Select Owner</option>
+                        </select></div>
+                    <button type="submit" class="btn btn-primary">Register Vehicle</button>
+                </form>
+                <form id="owner-form" class="modal-form" style="display:none;">
+                    <div class="form-row">
+                        <div class="form-group"><label>First Name</label><input type="text" name="first_name" required>
+                        </div>
+                        <div class="form-group"><label>Last Name</label><input type="text" name="last_name" required>
+                        </div>
+                    </div>
+                    <div class="form-group"><label>Email</label><input type="email" name="email" required></div>
+                    <div class="form-group"><label>Phone</label><input type="tel" name="phone" required></div>
+                    <div class="form-group"><label>Password</label><input type="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Register Owner</button>
+                </form>
+                <form id="insurance-form" class="modal-form" style="display:none;">
+                    <div class="form-group"><label>Vehicle</label><select name="vehicle_id"
+                            id="insurance-vehicle-select" required>
+                            <option value="">Select Vehicle</option>
+                        </select></div>
+                    <div class="form-row">
+                        <div class="form-group"><label>Policy Number</label><input type="text" name="policy_number"
+                                required></div>
+                        <div class="form-group"><label>Provider</label><input type="text" name="provider_name" required>
+                        </div>
+                    </div>
+                    <div class="form-group"><label>Type</label><select name="insurance_type">
+                            <option value="comprehensive">Comprehensive</option>
+                            <option value="third_party">Third Party</option>
+                        </select></div>
+                    <div class="form-row">
+                        <div class="form-group"><label>Coverage (Rs)</label><input type="number" name="coverage_amount"
+                                required></div>
+                        <div class="form-group"><label>Premium (Rs)</label><input type="number" name="premium_amount"
+                                required></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label>Start Date</label><input type="date" name="start_date" required>
+                        </div>
+                        <div class="form-group"><label>End Date</label><input type="date" name="end_date" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Insurance</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"><i class="fas fa-check-circle"></i><span id="toast-message">Success</span></div>
+    <script src="js/js.js"></script>
+</body>
+
+</html>
