@@ -1,6 +1,6 @@
 # Vehicle, Owner & Insurance Identity Management System
 
-## TheterX
+## TetherX
 
 A comprehensive system for managing vehicle identities, verifying ownership, handling insurance relationships, and enforcing validity checks for connected vehicle platform interactions.
 
@@ -114,7 +114,7 @@ The system enforces **three-layer validation**:
 
 ## Team Information
 
-**Hackathon**: TheterX
+**Hackathon**: TetherX
 **Team Name**:SUPERCALIFRAGILISTICEXPEALIDOCIOUS
 **Task**: Vehicle, Owner & Insurance Identity Management  
 **Team Member** : Krish Mehta , Parthasarthi, Pravin P, Saisujan
