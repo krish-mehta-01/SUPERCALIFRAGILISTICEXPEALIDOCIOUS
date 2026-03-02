@@ -1,7 +1,7 @@
 #  Vehicle Identity Management System 
 
 ## Hackathon Details
-- **Event**: TheterX
+- **Event**: TetherX
 - **Task**: Vehicle, Owner & Insurance Identity Management
 - **Submission Type**: Working Solution
 
